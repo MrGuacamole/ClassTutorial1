@@ -17,6 +17,21 @@ namespace Version_1_C
             InitializeComponent();
         }
 
+        protected override void updateForm()
+        {
+            base.updateForm();
+            clsSculpture lcWork = (clsSculpture)_Work;
+            txtMaterial.Text = lcWork.Material;
+            txtWeight.Text = Convert.ToString(lcWork.Weight);
+        }
+        protected override void pushData()
+        {
+            base.pushData();
+            clsSculpture lcWork = (clsSculpture)_Work;
+            lcWork.Material = txtMaterial.Text;
+            lcWork.Weight = Single.Parse(txtWeight.Text);
+        }
+
     }
 }
 

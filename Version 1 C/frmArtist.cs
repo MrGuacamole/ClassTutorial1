@@ -15,63 +15,81 @@ namespace Version_1_C
             InitializeComponent();
         }
 
-        private clsArtistList theArtistList;
-        private clsWorksList theWorksList;
+        private clsArtist _Artist;
+        //private clsArtistList _ArtistList;
+        private clsWorksList _WorksList;
         private byte sortOrder; // 0 = Name, 1 = Date
+
+        private void updateForm()
+        {
+            txtName.Text = _Artist.Name;
+            txtSpeciality.Text = _Artist.Speciality;
+            txtPhone.Text = _Artist.Phone;
+          //  _ArtistList = _Artist.ArtistList;
+            _WorksList = _Artist.WorksList;
+            sortOrder = _WorksList.SortOrder;
+        }
+        private void pushData()
+        {
+            _Artist.Name = txtName.Text;
+            _Artist.Speciality = txtSpeciality.Text;
+            _Artist.Phone = txtPhone.Text;
+            _WorksList.SortOrder = sortOrder;
+        }
+
 
         private void UpdateDisplay()
         {
             txtName.Enabled = txtName.Text == "";
             if (sortOrder == 0)
             {
-                theWorksList.SortByName();
+                _WorksList.SortByName();
                 rbByName.Checked = true;
             }
             else
             {
-                theWorksList.SortByDate();
+                _WorksList.SortByDate();
                 rbByDate.Checked = true;
             }
 
             lstWorks.DataSource = null;
-            lstWorks.DataSource = theWorksList;
-            lblTotal.Text = Convert.ToString(theWorksList.GetTotalValue());
+            lstWorks.DataSource = _WorksList;
+            lblTotal.Text = Convert.ToString(_WorksList.GetTotalValue());
         }
 
-        public void SetDetails(string prName, string prSpeciality, string prPhone, byte prSortOrder,
-                               clsWorksList prWorksList, clsArtistList prArtistList)
+        public void SetDetails(clsArtist prArtist)
         {
-            txtName.Text = prName;
-            txtSpeciality.Text = prSpeciality;
-            txtPhone.Text = prPhone;
-            theArtistList = prArtistList;
-            theWorksList = prWorksList;
-            sortOrder = prSortOrder;
+
+            _Artist = prArtist;
+            updateForm();
             UpdateDisplay();
+            ShowDialog();
         }
 
-        public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone, ref byte prSortOrder)
-        {
-            prName = txtName.Text;
-            prSpeciality = txtSpeciality.Text;
-            prPhone = txtPhone.Text;
-            prSortOrder = sortOrder;
-        }
+        //public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
+        //{
+        //    prName = txtName.Text;
+        //    prSpeciality = txtSpeciality.Text;
+        //    prPhone = txtPhone.Text;
+        //    _WorksList.SortOrder = sortOrder;
+        //}
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            theWorksList.DeleteWork(lstWorks.SelectedIndex);
+            _WorksList.DeleteWork(lstWorks.SelectedIndex);
             UpdateDisplay();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            theWorksList.AddWork();
+            _WorksList.AddWork();
             UpdateDisplay();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            pushData();
+
             if (isValid())
             {
                 DialogResult = DialogResult.OK;
@@ -81,7 +99,7 @@ namespace Version_1_C
         public virtual Boolean isValid()
         {
             if (txtName.Enabled && txtName.Text != "")
-                if (theArtistList.Contains(txtName.Text))
+                if (_Artist.IsDuplicate(txtName.Text))
                 {
                     MessageBox.Show("Artist with that name already exists!");
                     return false;
@@ -97,7 +115,7 @@ namespace Version_1_C
             int lcIndex = lstWorks.SelectedIndex;
             if (lcIndex >= 0)
             {
-                theWorksList.EditWork(lcIndex);
+                _WorksList.EditWork(lcIndex);
                 UpdateDisplay();
             }
         }

@@ -9,39 +9,47 @@ namespace Version_1_C
         private string speciality;
         private string phone;
         
-        private decimal theTotalValue;
+        private decimal _TotalValue;
 
-        private clsWorksList theWorksList;
-        private clsArtistList theArtistList;
+        private clsWorksList _WorksList;
+        private clsArtistList _ArtistList;
         
         private static frmArtist artistDialog = new frmArtist();
-        private byte sortOrder;
+
+        public string Name { get => name; set => name = value; }
+        public string Speciality { get => speciality; set => speciality = value; }
+        public string Phone { get => phone; set => phone = value; }
+        public decimal TotalValue { get => _TotalValue; set => _TotalValue = value; }
+        public clsWorksList WorksList { get => _WorksList; set => _WorksList = value; }
+        public clsArtistList ArtistList { get => _ArtistList; set => _ArtistList = value; }
 
         public clsArtist(clsArtistList prArtistList)
         {
-            theWorksList = new clsWorksList();
-            theArtistList = prArtistList;
+            WorksList = new clsWorksList();
+            ArtistList = prArtistList;
             EditDetails();
         }
         
         public void EditDetails()
         {
-            artistDialog.SetDetails(name, speciality, phone, sortOrder, theWorksList, theArtistList);
-            if (artistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                artistDialog.GetDetails(ref name, ref speciality, ref phone, ref sortOrder);
-                theTotalValue = theWorksList.GetTotalValue();
-            }
+            artistDialog.SetDetails(this);
+            TotalValue = WorksList.GetTotalValue();
+            
         }
 
-        public string GetKey()
+        public bool IsDuplicate(string prArtistName)
         {
-            return name;
+            return _ArtistList.ContainsKey(prArtistName);
         }
 
-        public decimal GetWorksValue()
-        {
-            return theTotalValue;
-        }
+        //public string GetKey()
+        //{
+        //    return name;
+        //}
+
+        //public decimal GetWorksValue()
+        //{
+        //    return TotalValue;
+        //}
     }
 }
