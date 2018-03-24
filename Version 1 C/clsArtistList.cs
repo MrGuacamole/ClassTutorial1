@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+
 
 namespace Version_1_C
 {
@@ -16,23 +16,29 @@ namespace Version_1_C
             if (lcArtist != null)
                 lcArtist.EditDetails();
             else
-                MessageBox.Show("Sorry no artist by this name");
+                throw new Exception("Sorry no artist by this name");
+               
         }
-       
+
         public void NewArtist()
         {
             clsArtist lcArtist = new clsArtist(this);
-            try
+
+            if (lcArtist.Name != "")
             {
-                if (lcArtist.Name != "")
-                {
+                try {
                     Add(lcArtist.Name, lcArtist);
-                    MessageBox.Show("Artist added!");
                 }
+                catch
+                {
+                    throw new Exception("Duplicate Key!");
+                }
+
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Duplicate Key!");
+
+
+            else {
+                throw new Exception("Artist Name empty");
             }
         }
         
@@ -57,9 +63,9 @@ namespace Version_1_C
                 lcFormatter.Serialize(lcFileStream, this);
                 lcFileStream.Close();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message, "File Save Error");
+                throw new Exception(ex.Message + "File Retrieve Error");
             }
         }
 
@@ -78,11 +84,11 @@ namespace Version_1_C
                 lcFileStream.Close();
             }
 
-            catch (Exception e)
+            catch(Exception ex)
             {
-                
-                MessageBox.Show(e.Message, "File Retrieve Error");
                 lcArtistList = new clsArtistList();
+                throw new Exception(ex.Message + "File Retrieve Error");
+                
             }
 
             return lcArtistList;

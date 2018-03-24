@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace Version_1_C
 {
@@ -13,23 +12,36 @@ namespace Version_1_C
 
         public byte SortOrder { get => sortOrder; set => sortOrder = value; }
 
-        public void AddWork()
+        public void AddWork(char lcReply)
         {
-            clsWork lcWork = clsWork.NewWork();
-            if (lcWork != null)
-            {
-                Add(lcWork);
-            }
+            //char lcReply;
+            //InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
+            ////inputBox.ShowDialog();
+            ////if (inputBox.getAction() == true)
+            //if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            
+                clsWork lcWork = clsWork.CheckWork(lcReply);
+                if (lcWork != null)
+                {
+                    Add(lcWork);
+                }
+            //}
+            //else
+            //{
+            //    inputBox.Close();
+            //}
+            
         }
        
+
         public void DeleteWork(int prIndex)
         {
             if (prIndex >= 0 && prIndex < this.Count)
             {
-                if (MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
+               
                     this.RemoveAt(prIndex);
-                }
+                
             }
         }
         
@@ -40,10 +52,7 @@ namespace Version_1_C
                 clsWork lcWork = (clsWork)this[prIndex];
                 lcWork.EditDetails();
             }
-            else
-            {
-                MessageBox.Show("Sorry no work selected #" + Convert.ToString(prIndex));
-            }
+          
         }
 
         public decimal GetTotalValue()

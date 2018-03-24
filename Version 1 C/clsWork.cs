@@ -21,30 +21,43 @@ namespace Version_1_C
 
         public abstract void EditDetails();
 
-         public static clsWork NewWork()
-         {
-             char lcReply;
-             InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
-             //inputBox.ShowDialog();
-             //if (inputBox.getAction() == true)
-             if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-             {
-                 lcReply = Convert.ToChar(inputBox.getAnswer());
+        //public static clsWork NewWork()
+        //{
+        //    char lcReply;
+        //    InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
+        //    //inputBox.ShowDialog();
+        //    //if (inputBox.getAction() == true)
+        //    if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        lcReply = Convert.ToChar(inputBox.getAnswer());
 
-                 switch (char.ToUpper(lcReply))
-                 {
-                     case 'P': return new clsPainting();
-                     case 'S': return new clsSculpture();
-                     case 'H': return new clsPhotograph();
-                     default: return null;
-                 }
-             }
-             else
-             {
-                 inputBox.Close();
-                 return null;
-             }
-         }
+        //        switch (char.ToUpper(lcReply))
+        //        {
+        //            case 'P': return new clsPainting();
+        //            case 'S': return new clsSculpture();
+        //            case 'H': return new clsPhotograph();
+        //            default: return null;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        inputBox.Close();
+        //        return null;
+        //    }
+        //}
+
+        public static clsWork CheckWork(char prWork)
+        {
+            switch (char.ToUpper(prWork))
+            {
+                case 'P': return new clsPainting();
+                case 'S': return new clsSculpture();
+                case 'H': return new clsPhotograph();
+                default: return null;
+            }
+
+        }
+    
 
         public override string ToString()
         {

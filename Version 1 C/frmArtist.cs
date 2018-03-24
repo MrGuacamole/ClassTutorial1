@@ -76,15 +76,48 @@ namespace Version_1_C
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            _WorksList.DeleteWork(lstWorks.SelectedIndex);
-            UpdateDisplay();
+            if (lstWorks.SelectedIndex > -1)
+            {
+                DialogResult result = MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    _WorksList.DeleteWork(lstWorks.SelectedIndex);
+                    UpdateDisplay();
+                }
+               
+            }
+            else
+            {
+                MessageBox.Show("Unable to Delete, No Work Selected");
+            }
+
+            
+           
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _WorksList.AddWork();
-            UpdateDisplay();
-        }
+           
+                char lcReply;
+                InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
+                //inputBox.ShowDialog();
+                //if (inputBox.getAction() == true)
+                if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    lcReply = Convert.ToChar(inputBox.getAnswer());
+                    _WorksList.AddWork(lcReply);
+                    UpdateDisplay();
+                }
+                
+                else
+                {
+                    inputBox.Close();
+                }
+
+            }
+            
+            
+        
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -117,6 +150,10 @@ namespace Version_1_C
             {
                 _WorksList.EditWork(lcIndex);
                 UpdateDisplay();
+            }
+            else
+            {
+                MessageBox.Show("Sorry no work selected");
             }
         }
 
