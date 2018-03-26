@@ -3,16 +3,21 @@ using System.Collections.Generic;
 
 namespace Version_1_C
 {
-    class clsNameComparer : IComparer<clsWork>
-    {
-        public int Compare(clsWork X, clsWork Y)
+    
+        
+        sealed class clsNameComparer : IComparer<clsWork>
         {
-            //clsWork workClassX = (clsWork)x;
-            //clsWork workClassY = (clsWork)y;
-            string lcNameX = X.Name;
-            string lcNameY = Y.Name;
+        public static readonly clsNameComparer Instance = new clsNameComparer();
+        public int Compare(clsWork X, clsWork Y)
+            {
+                //clsWork workClassX = (clsWork)x;
+                //clsWork workClassY = (clsWork)y;
+                string lcNameX = X.Name;
+                string lcNameY = Y.Name;
 
-            return lcNameX.CompareTo(lcNameY);
+                return lcNameX.CompareTo(lcNameY);
+            }
         }
-    }
+    
+  
 }

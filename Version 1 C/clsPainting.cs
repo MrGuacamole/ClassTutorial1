@@ -10,6 +10,7 @@ namespace Version_1_C
         private float _Height;
         private string _Type;
 
+
         [NonSerialized()]
         private static frmPainting _PaintDialog;
 
@@ -31,6 +32,7 @@ namespace Version_1_C
 
              public override void EditDetails()
         {
+         
             if (_PaintDialog == null)
                 _PaintDialog = new frmPainting();
             _PaintDialog.SetDetails(this);

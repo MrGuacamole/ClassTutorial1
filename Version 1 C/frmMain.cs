@@ -8,12 +8,14 @@ using System.Windows.Forms;
 
 namespace Version_1_C
 {
-    public partial class frmMain : Form
+    public sealed partial class frmMain : Form
     {
-        /// <summary>
-        /// Matthias Otto, NMIT, 2010-2016
-        /// </summary>
-        public frmMain()
+       
+            public static readonly frmMain Instance = new frmMain();
+            /// <summary>
+            /// Matthias Otto, NMIT, 2010-2016
+            /// </summary>
+            public frmMain()
         {
             InitializeComponent();
         }

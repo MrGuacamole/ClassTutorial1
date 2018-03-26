@@ -18,7 +18,7 @@ namespace Version_1_C
         private clsArtist _Artist;
         //private clsArtistList _ArtistList;
         private clsWorksList _WorksList;
-        private byte sortOrder; // 0 = Name, 1 = Date
+        //private byte sortOrder; // 0 = Name, 1 = Date
 
         private void updateForm()
         {
@@ -41,7 +41,7 @@ namespace Version_1_C
         private void UpdateDisplay()
         {
             txtName.Enabled = txtName.Text == "";
-            if (sortOrder == 0)
+            if (_WorksList.SortOrder == 0)
             {
                 _WorksList.SortByName();
                 rbByName.Checked = true;
@@ -146,7 +146,7 @@ namespace Version_1_C
         private void lstWorks_DoubleClick(object sender, EventArgs e)
         {
             int lcIndex = lstWorks.SelectedIndex;
-            if (lcIndex >= 0)
+            if (lcIndex > -1)
             {
                 _WorksList.EditWork(lcIndex);
                 UpdateDisplay();
