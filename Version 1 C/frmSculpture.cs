@@ -8,11 +8,12 @@ using System.Windows.Forms;
 
 namespace Version_1_C
 {
-    public partial class frmSculpture : Version_1_C.frmWork
+    public sealed partial class frmSculpture : Version_1_C.frmWork
     {
+        public static readonly frmSculpture Instance = new frmSculpture();
 
-        
-        public frmSculpture()
+
+        private frmSculpture()
         {
             InitializeComponent();
         }

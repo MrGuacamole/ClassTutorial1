@@ -7,6 +7,8 @@ namespace Version_1_C
     {
        
         public static readonly clsDateComparer Instance = new clsDateComparer();
+        private clsDateComparer() { }
+
         public int Compare(clsWork X, clsWork Y)
         {
             //clsWork lcWorkX = (clsWork)x;

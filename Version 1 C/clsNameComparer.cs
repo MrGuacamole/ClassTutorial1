@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace Version_1_C
 {
-    
-        
-        sealed class clsNameComparer : IComparer<clsWork>
-        {
+
+
+    sealed class clsNameComparer : IComparer<clsWork>
+    {
         public static readonly clsNameComparer Instance = new clsNameComparer();
+        private clsNameComparer() { }
         public int Compare(clsWork X, clsWork Y)
             {
                 //clsWork workClassX = (clsWork)x;

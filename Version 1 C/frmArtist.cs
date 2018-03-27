@@ -27,14 +27,14 @@ namespace Version_1_C
             txtPhone.Text = _Artist.Phone;
           //  _ArtistList = _Artist.ArtistList;
             _WorksList = _Artist.WorksList;
-            sortOrder = _WorksList.SortOrder;
+            //sortOrder = _WorksList.SortOrder;
         }
         private void pushData()
         {
             _Artist.Name = txtName.Text;
             _Artist.Speciality = txtSpeciality.Text;
             _Artist.Phone = txtPhone.Text;
-            _WorksList.SortOrder = sortOrder;
+           // _WorksList.SortOrder = sortOrder;
         }
 
 
@@ -159,7 +159,7 @@ namespace Version_1_C
 
         private void rbByDate_CheckedChanged(object sender, EventArgs e)
         {
-            sortOrder = Convert.ToByte(rbByDate.Checked);
+            _WorksList.SortOrder = Convert.ToByte(rbByDate.Checked);
             UpdateDisplay();
         }
 

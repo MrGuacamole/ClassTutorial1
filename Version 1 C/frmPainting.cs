@@ -8,10 +8,12 @@ using System.Windows.Forms;
 
 namespace Version_1_C
 {
-    public partial class frmPainting : Version_1_C.frmWork
+    public sealed partial class frmPainting : Version_1_C.frmWork
     {
+        public static readonly frmPainting Instance = new frmPainting();
 
-        public frmPainting()
+
+        private frmPainting()
         {
             InitializeComponent();
         }

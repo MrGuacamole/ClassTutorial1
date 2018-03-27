@@ -7,8 +7,8 @@ namespace Version_1_C
     public class clsWorksList : List<clsWork>
     {
         private byte sortOrder;
-        private static clsNameComparer _NameComparer = new clsNameComparer();
-        private static clsDateComparer _DateComparer = new clsDateComparer();
+        private static clsNameComparer _NameComparer = clsNameComparer.Instance;
+        private static clsDateComparer _DateComparer = clsDateComparer.Instance;
 
         public byte SortOrder { get => sortOrder; set => sortOrder = value; }
 

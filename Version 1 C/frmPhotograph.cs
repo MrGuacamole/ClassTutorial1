@@ -8,10 +8,11 @@ using System.Windows.Forms;
 
 namespace Version_1_C
 {
-    public partial class frmPhotograph : Version_1_C.frmWork
+    public sealed partial class frmPhotograph : Version_1_C.frmWork
     {
+        public static readonly frmPhotograph Instance = new frmPhotograph();
 
-        public frmPhotograph()
+        private frmPhotograph()
         {
             InitializeComponent();
         }

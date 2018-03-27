@@ -10,17 +10,20 @@ namespace Version_1_C
 {
     public sealed partial class frmMain : Form
     {
-       
-            public static readonly frmMain Instance = new frmMain();
-            /// <summary>
-            /// Matthias Otto, NMIT, 2010-2016
-            /// </summary>
-            public frmMain()
+
+        private static readonly frmMain _Instance = new frmMain();
+
+        /// <summary>
+        /// Matthias Otto, NMIT, 2010-2016
+        /// </summary>
+        private frmMain()
         {
             InitializeComponent();
         }
 
         private clsArtistList _ArtistList;
+
+        public static frmMain Instance => _Instance;
 
         private void UpdateDisplay()
         {

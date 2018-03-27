@@ -6,6 +6,10 @@ namespace Version_1_C
     [Serializable()] 
     public class clsPainting : clsWork
     {
+        private static readonly clsPainting Instance = new clsPainting();
+
+        public delegate void LoadPaintingFormDelegate(clsPainting prPainting);
+        public static LoadPaintingFormDelegate LoadPaintingForm;
         private float _Width;
         private float _Height;
         private string _Type;
@@ -32,10 +36,16 @@ namespace Version_1_C
 
              public override void EditDetails()
         {
+            LoadPaintingForm(this);
          
-            if (_PaintDialog == null)
-                _PaintDialog = new frmPainting();
-            _PaintDialog.SetDetails(this);
+            //if (_PaintDialog == null)
+            //    _PaintDialog = new frmPainting();
+            //_PaintDialog.SetDetails(this);
+        }
+
+        public static void Run(clsPainting prPainting)
+        {
+            Instance.SetDetails(prPainting);
         }
 
     }
