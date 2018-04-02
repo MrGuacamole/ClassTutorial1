@@ -32,6 +32,9 @@ namespace Version_1_C
             lcWork.Width = Single.Parse(txtWidth.Text);
             lcWork.Height = Single.Parse(txtHeight.Text);
             lcWork.Type = txtType.Text;
+        }        public static void Run(clsPhotograph prPhotograph)
+        {
+            Instance.SetDetails(prPhotograph);
         }
 
     }

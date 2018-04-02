@@ -6,6 +6,9 @@ namespace Version_1_C
     [Serializable()] 
     public class clsSculpture : clsWork
     {
+        public delegate void LoadSculptureFormDelegate(clsSculpture prSculpture);
+        public static LoadSculptureFormDelegate LoadSculptureForm;
+
         private static frmSculpture _SculptureDialog;
         private float _Weight;
         private string _Material;
@@ -15,9 +18,10 @@ namespace Version_1_C
 
         public override void EditDetails()
         {
-            if (_SculptureDialog == null)
-                _SculptureDialog = new frmSculpture();
-            _SculptureDialog.SetDetails(this);
+            LoadSculptureForm(this);
+            //if (_SculptureDialog == null)
+            //    _SculptureDialog = frmSculpture.Instance;
+            //_SculptureDialog.SetDetails(this);
         }
     }
 }

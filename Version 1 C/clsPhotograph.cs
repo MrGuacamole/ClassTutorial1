@@ -6,6 +6,8 @@ namespace Version_1_C
     [Serializable()]
     public class clsPhotograph : clsWork
     {
+        public delegate void LoadPhotographFormDelegate(clsPhotograph prPhotograph);
+        public static LoadPhotographFormDelegate LoadPhotographForm;
 
         private static frmPhotograph _PhotographDialog;
 
@@ -19,9 +21,10 @@ namespace Version_1_C
 
         public override void EditDetails()
         {
-            if (_PhotographDialog == null)
-                _PhotographDialog = new frmPhotograph();
-            _PhotographDialog.SetDetails(this);
+            LoadPhotographForm(this);
+            //if (_PhotographDialog == null)
+            //    _PhotographDialog = frmPhotograph.Instance;
+            //_PhotographDialog.SetDetails(this);
         }
     }
 }

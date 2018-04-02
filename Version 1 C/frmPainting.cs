@@ -12,6 +12,9 @@ namespace Version_1_C
     {
         public static readonly frmPainting Instance = new frmPainting();
 
+        //private static readonly frmPainting _Instance = new frmPainting();
+
+        //public static frmPainting Instance => _Instance;
 
         private frmPainting()
         {
@@ -35,6 +38,11 @@ namespace Version_1_C
             lcWork.Width = Single.Parse(txtWidth.Text);
             lcWork.Height = Single.Parse(txtHeight.Text);
             lcWork.Type = txtType.Text;
+        }
+
+        public static void Run(clsPainting prPainting)
+        {
+            Instance.SetDetails(prPainting);
         }
 
         //public virtual void SetDetails(string prName, DateTime prDate, decimal prValue,
